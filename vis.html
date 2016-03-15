@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ITBA Diplomatura Big Data - Proyecto Final</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="css/styles.css" />
+    <link rel="stylesheet" type="text/css" href="css/leaflet.css"/>
+    <link rel="stylesheet" type="text/css" href="css/MarkerCluster.css" />
+    <link rel="stylesheet" type="text/css" href="css/MarkerCluster.Default.css" />
+</head>
+
+<body>
+
+    <nav class="navbar navbar-inverse navbar-static-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">TP Final BigData ITBA 2015/2</a>
+            </div>
+            <div id="navbar" class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="report.html">Informe</a></li>
+                    <li class="active"><a href="#">Visualización de datos</a></li>
+                    <li><a href="about.html">Sobre el proyecto</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Visualización de datos</h1>
+            </div>
+        </div>
+
+        <div class="row loading">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                <div class="well well-lg"><strong>Cargando visualizaciones...</strong></div>
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <h4 style="display: none;">
+                    Seleccione un año: 
+                    <select id="yearSelector">
+                        <option value="2007">2007</option>
+                        <option value="2008">2008</option>
+                        <option value="2009">2009</option>
+                        <option value="2010">2010</option>
+                        <option value="2011">2011</option>
+                        <option value="2012">2012</option>
+                        <option value="2013">2013</option>
+                        <option value="2014">2014</option>
+                        <option value="2015">2015</option>
+                        <option selected="selected" value="2016">2016</option>
+                        <option value="all">Todos</option>
+                    </select>
+                </h4>
+                <div class="alert alert-warning" role="alert" id="alertAllYears" style="display: none;">
+                    <strong>Advertencia: </strong>
+                    <ul>
+                        <li>El mapa debe ser refrescado manualmente</li>
+                        <li>Las visualizaciones podrían funcionar lento dependiendo de las características de la PC debido a la cantidad de datos que se manipulan.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div id="dataCount"></div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div id="eventsVis">
+                    <h4 style="display: none;">
+                        Eventos y cantidad total
+                        <small><a class='reset btn btn-danger btn-xs' href='javascript:eventsVis.filterAll(); dc.redrawAll();' style='display: none;'>limpiar filtro</a></small>
+                    </h4>
+              </div>
+            </div>
+
+            <div class="col-md-3">
+                <div id="yearVis">
+                    <h4 style="display: none;">
+                        Eventos por año
+                        <small><a class='reset btn btn-danger btn-xs' href='javascript:yearVis.filterAll(); dc.redrawAll();' style='display: none;'>limpiar filtro</a></small>
+                    </h4>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div id="monthsVis">
+                    <h4 style="display: none;">
+                        Eventos por mes 
+                        <small><a class='reset btn btn-danger btn-xs' href='javascript:monthsVis.filterAll(); dc.redrawAll();' style='display: none;'>limpiar filtro</a></small>
+                    </h4>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div id="timeLineVis">
+                    <h4 style="display: none;">
+                        Línea de tiempo (cantidad total de eventos por día)
+                        <span class="glyphicon glyphicon-info-sign" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Seleccione un rango de tiempo en el gráfico inferior para hacer zoom"></span>
+                        <small>
+                            <span class="reset" style="display: none;">filtro: <span class="filter"></span></span>
+                        </small>
+                        <small>
+                            <a class='reset btn btn-danger btn-xs' href='javascript:timeLineVis.filterAll(); timeLineRangeVis.filterAll(); dc.redrawAll();' style='display: none;'>limpiar filtro</a>
+                        </small>
+                    </h4>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div id="timeLineRangeVis">
+                </div>
+            </div>
+        </div>
+
+        <div class="row" style="height: 575px;">
+            <div class="col-md-12">
+                <div id="map" class="map">
+                    <h4 style="display: none;">
+                        Mapa de eventos
+                        <small>
+                            <a id="refreshMapButton" style="display: none;" class='reset btn btn-success btn-xs' href='javascript:mapVis.redraw();'>actualizar mapa</a>
+                        </small>
+                    </h4>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+    <script type="text/javascript" src="js/d3.js"></script>
+    <script type="text/javascript" src="js/crossfilter.js"></script>
+    <script type="text/javascript" src="js/dc.js"></script>
+    <script type="text/javascript" src="http://momentjs.com/downloads/moment-with-locales.min.js"></script>
+
+    <script type="text/javascript" src="js/leaflet.js"></script>
+    <script type="text/javascript" src="js/leaflet.markercluster.js"></script>
+    <script type="text/javascript" src="js/dc.leaflet.js"></script>
+
+    <script type="text/javascript" src="js/async.js"></script>
+
+    <script type="text/javascript" src="vis.js"></script>
+
+    <!-- Modals -->
+    <div class="modal" id="loadingModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="loadingModalLabel">Cargando</h4>
+                </div>
+                <div class="modal-body">
+                    Aguarde un momento, las visualizaciones se están cargando...
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
