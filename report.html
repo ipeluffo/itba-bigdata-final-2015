@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ITBA Diplomatura Big Data - Proyecto Final</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+    <style type="text/css">
+        img {
+            max-width: 100%;
+            display: block;
+            height: auto;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-inverse navbar-static-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html">TP Final BigData ITBA 2015/2</a>
+            </div>
+            <div id="navbar" class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="index.html">Home</a></li>
+                    <li class="active"><a href="#">Informe</a></li>
+                    <li><a href="vis.html">Visualización de datos</a></li>
+                    <li><a href="about.html">Acerca de</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-1"></div>
+
+            <div class="col-md-10">
+                <h1>Bahía 911</h1>
+
+                <!-- #######################  OBJETIVO  ####################### -->
+                <h2>Objetivo</h2>
+                <p>
+                    El objetivo principal de este trabajo práctico consistió en utilizar los datos públicos de los llamados al 911 de la ciudad de Bahía Blanca para contestar a distintos tipos de preguntas, mediante la utilización de múltiples visualizaciones interactivas.
+                </p>
+                <p>
+                    Considerando que los datos contienen información del evento o la ayuda requerida, el lugar reportado y la fecha en que se hizo la llamada al 911, primeramente se plantearon varias consultas para ser respondidas mediante la exploración de la información:
+                    <ol>
+                        <li>¿Hay momentos donde ocurrió una cantidad llamativa de algún tipo de evento?</li>
+                        <li>Verificar si la cantidad de eventos de accidentes de tránsito aumentó en fechas cercanas a cambios de quincena o festividades como Navidad y Año Nuevo.</li>
+                        <li>¿Cuáles son los meses y años donde hubieron más llamados al 911?</li>
+                        <li>¿Qué lugares se reportaron al 911?</li>
+                        <li>¿Hay reiterados llamados del mismo tipo reportados para un mismo lugar?</li>
+                    </ol>
+                </p>
+                <p>
+                    Partiendo de la formulación de las inquietudes anteriores, se pudo determinar de manera más clara qué tipo de visualizaciones ayudarían a resolver las mismas.
+                </p>
+
+                <!-- #######################  OBTENCION DE LA INFORMACION  ####################### -->
+                <h2>Obtención de la información</h2>
+                <p>
+                    Para obtener la información se utilizó uno de los múltiples servicios que provee el gobierno de la ciudad de Bahía Blanca de datos abiertos, también conocido como Gobierno Abierto.
+                </p>
+                <p>
+                    El servicio más precisamente se detalla a continuación:
+                    <ul>
+                        <li>URL de acceso: <a href="http://bahiablanca.gov.ar:8080/Publico/qpbb">http://bahiablanca.gov.ar:8080/Publico/qpbb</a></li>
+                        <li>Parámetro: f1. Permite fijar la fecha de inicio de los resultados a buscar.</li>
+                        <li>Parámetro: f2. Permite fijar la fecha de fin de los resultados a buscar.</li>
+                    </ul>
+                </p>
+                <p>
+                    Los datos disponibles comienzan a partir del día 28 de Mayo de 2007 y pueden obtenerse hasta la actualidad. Para el desarrollo de este proyecto, se obtuvieron todos los eventos desde el primer día disponible hasta el 25 de Febrero de 2016.
+                </p>
+
+                <!-- #######################  Procesamiento y limpieza de la información  ####################### -->
+                <h2>Procesamiento y limpieza de la información</h2>
+                <h3>Formato original de los datos</h3>
+                <p>
+                    Oficialmente el servicio antes descripto retorna los resultados en formato XML, por ejemplo:
+                    <pre>
+                        &lt;items&gt;
+                            &lt;item&gt;
+                                &lt;fecha&gt;01/01/2016 00:03:57&lt;/fecha&gt;
+                                &lt;evento&gt;ATENCION MEDICA EN DOMICILIOS&lt;/evento&gt;
+                                &lt;domicilio&gt;DR NARCISO MALLEA 6000&lt;/domicilio&gt;
+                                &lt;localidad&gt;BAHIA BLANCA&lt;/localidad&gt;
+                                &lt;lat&gt;-38,69007&lt;/lat&gt;
+                                &lt;lng&gt;-62,27739&lt;/lng&gt;
+                            &lt;/item&gt;
+                            …
+                        &lt;/items&gt;
+                    </pre>
+                </p>
+                <p>
+                    Dado que este formato no era cómodo para trabajar con librerías de visualización basadas en Javascript, se optó por transformar los datos a <a href="https://en.wikipedia.org/wiki/Tab-separated_values">TSV</a> (tab-separated values) debido a que el archivo de datos final sería más liviano que un JSON, lo que haría más rápida la carga de datos en el lado del cliente al momento de cargar las visualizaciones.
+                </p>
+
+                <h3>Modificación de formato de campo fecha</h3>
+                <p>
+                    Para reducir el tiempo de procesamiento de los datos al momento de renderizar las visualizaciones, se optó por reemplazar el formato original de la fecha por el formato más estándar AÑO/MES/DIA. De esta forma, en Javascript no hizo falta hacer un parseo intermedio de las fechas y así se logró una optimización del procesamiento de los datos.
+                </p>
+
+                <h3>Modificación de formato de campo fecha</h3>
+                <p>
+                    Para reducir el tiempo de procesamiento de los datos al momento de renderizar las visualizaciones, se optó por reemplazar el formato original de la fecha por el formato más estándar AÑO/MES/DIA. De esta forma, en Javascript no hizo falta hacer un parseo intermedio de las fechas y así se logró una optimización del procesamiento de los datos.
+                </p>
+
+                <h3>Corrección de campo “domicilio”</h3>
+                <p>
+                    Durante el desarrollo del proyecto se detectó que los domicilios no tienen valores consistentes con las calles reales de la ciudad de Bahía Blanca, por ejemplo:
+                    <ol>
+                        <li>BERUTI 9000</li>
+                        <li>BLANDENGUES 9000</li>
+                        <li>RIO NEGRO 6000</li>
+                    </ol>
+                </p>
+                <p>
+                    Luego de hacer un análisis de los datos de geolocalización se detectó que todos los domicilios tenían un número cero extra al final, es decir que el domicilio real era “BERUTI 900” en lugar de “BERUTI 9000”.
+                </p>
+                <p>
+                    De esta manera, se procedió a actualizar todos los domicilios que tuvieran un cero al final para así eliminarlo y corregir los mismos.
+                </p>
+
+                <h3>Reducción de tamaño de dataset</h3>
+                <p>
+                    Con el objetivo de reducir el tamaño del dataset final luego de limpiar los valores, se optó por hacer algunas modificaciones a algunos de los campos de los distintos registros.
+                </p>
+                <p>
+                    Primeramente, dado que los valores del campo <strong>evento</strong> era una lista fija de valores (por ejemplo “ATENCIÓN MÉDICA EN DOMICILIOS” y “RECLAMOS POR OLORES EN BAHÍA BLANCA”), se decidió reemplazar dichos valores por identificadores numéricos que luego serían utilizados para mostrar correctamente la descripción de cada tipo de evento.
+                </p>
+                <p>
+                    Luego, se optó por reducir la precisión de la latitud y longitud a seis decimales, dado que era una cantidad significativa para poder visualizar correctamente los datos geolocalizados en un mapa.
+                </p>
+                <p>
+                    Finalmente, el campo de ciudad contenía múltiples valores inconsistentes y considerando que todos los llamados corresponden a la ciudad de Bahía Blanca y alrededores, el mismo no resultó relevante para el desarrollo del proyecto por lo que se decidió eliminar este dato para reducir aún más el peso de los datos.
+                </p>
+
+                <h3>Herramienta utilizada</h3>
+                <p>
+                    Para realizar la transformación de XML a TSV, modificación y limpieza del dataset se decidió utilizar la herramienta <a href="http://openrefine.org/">OpenRefine</a> dada su facilidad de poder ejecutar cada uno de los pasos y poder corregir errores utilizando sus opciones de deshacer y rehacer.
+                </p>
+
+                <!-- #######################  Elección de herramientas a utilizar  ####################### -->
+                <h2>Elección de herramientas a utilizar</h2>
+                <p>
+                    Para el desarrollo del proyecto se comenzó haciendo algunas pruebas de concepto utilizando la herramienta Tableau. A pesar de su facilidad para crear visualizaciones, se encontraron algunas limitaciones a la hora de organizar los filtros disponibles para lograr un tablero (<i>dashboard</i>) que sea cómodo de utilizar. Además, el proyecto corriendo desde el servicio Tableau Public funcionaba algo lento para lo que se pretendía originalmente.
+                </p>
+                <p>
+                    Por esta razón, se optó por hacer un desarrollo utilizando tecnologías web como Javascript, librerías de visualización basadas en el mismo lenguaje, y <a href="http://getbootstrap.com/">Bootstrap</a> para el maquetado HTML dado el potencial y flexibilidad que proveen para desarrollar proyectos de este tipo.
+                </p>
+                <p>
+                    Luego de hacer una investigación de las distintas herramientas disponibles como D3.js o librerías basadas en ella, u otras librerías independientes como p5.js, se decidió utilizar la librería <a href="http://dc-js.github.io/dc.js/">dc.js : Dimensional Charting Javascript Library</a> basada en las librerías <a href="https://d3js.org/">D3.js</a> y <a href="http://square.github.io/crossfilter/">crossfilter</a>.
+                </p>
+                <p>
+                    Las posibilidades que brinda la librería dc.js hicieron que no quedaran dudas que esta librería era ideal para el desarrollo del proyecto, ya que cumplía con las siguientes características:
+                    <ul>
+                        <li>Mediante la utilización de la librería crossfilter, dc.js permite que las visualizaciones estén sincronizadas haciendo que los filtros aplicados en una afecten al resto de las visualizaciones, logrando así una interacción muy natural para poder hacer una exploración interactiva de la información.</li>
+                        <li>Gracias al uso de D3.js, dc.js permite generar visualizaciones muy elegantes y útiles para la representación de la información. Además, permite la manipulación de muchos datos en forma óptima.</li>
+                        <li>Ofrece sumarizar los datos en tiempo real con tiempos de procesamiento bajos.</li>
+                    </ul>
+                </p>
+
+                <!-- #######################  VISUALIZACIONES  ####################### -->
+                <h2>Visualizaciones</h2>
+                <p>
+                    Luego de analizar los planteos a resolver y la librería a utilizar, se procedió a elegir las visualizaciones a implementar acorde a las posibilidades que ésta última brinda.
+                </p>
+
+                <h3>Visualización para cantidad de eventos</h3>
+                <p>
+                    Para los eventos, se decidió armar una visualización de barras horizontales con los distintos tipos de eventos y la cantidad total de cada uno de ellos para el rango de fechas filtrado. El orden de las barras está dado por la cantidad de eventos de manera decreciente.
+                </p>
+                <p>
+                    Un ejemplo de la visualización:
+                </p>
+                <img src="images/report/01.png" class="center-block" />
+
+                <h3>Visualización de cantidad de eventos por año</h3>
+                <p>
+                    Más allá de la cantidad de cada tipo de evento, es importante saber la cantidad de ellos a lo largo del año, por eso se decidió hacer una visualización exclusiva para ésto:
+                </p>
+                <img src="images/report/02.png" class="center-block" />
+                <p>
+                    Como se puede observar, se armó una visualización similar de barras horizontales para lograr una mejor lectura de las etiquetas. A diferencia de la visualización de eventos, el orden de las barras se dejó acorde al año y no a la cantidad.
+                </p>
+
+                <h3>Visualización de cantidad de eventos por mes</h3>
+                <p>
+                    De manera análoga a la visualización por año, se decidió agregar una visualización que permitiese ver y analizar rápidamente la cantidad total de eventos en cada uno de los distintos meses. A continuación se puede ver un ejemplo de la misma.
+                </p>
+                <img src="images/report/03.png" class="center-block" />
+
+                <h3>Línea de tiempo</h3>
+                <p>
+                    Esta visualización fue una de las más importantes dado el impacto que tiene a la hora de analizar los datos. Gracias a esta visualización, se pueden encontrar patrones o anomalías muy rápidamente.
+                </p>
+                <p>
+                    El objetivo de la visualización fue representar la cantidad total de eventos por día a lo largo del tiempo. Dado que el rango de tiempo pueden ser años, la visualización permite hacer zoom para llegar a la unidad mínima del día.
+                </p>
+                <p>
+                    Además, para ayudar a la navegación se agregó una visualización a menor escala para facilitar la navegación y filtrado del rango de fechas de la línea de tiempo.
+                </p>
+                <p>
+                    A continuación se puede ver un ejemplo de la visualización:
+                </p>
+                <img src="images/report/04.png" class="center-block" />
+                <p>
+                    En la captura anterior se puede apreciar que la unidad de tiempo es el año, pero haciendo zoom se puede ver más en detalle la misma y cómo funciona el filtrado en la visualización auxiliar del filtro de rango de fechas:
+                </p>
+                <img src="images/report/05.png" class="center-block" />
+                <p>
+                    Finalmente, para el caso en que el usuario haya seleccionado un solo tipo de evento, el color de la visualización de la línea de tiempo se adaptará al color del evento. En caso que hayan múltiples tipos de eventos, la línea de tiempo será representada en color negro.
+                </p>
+
+                <h3>Mapa de eventos</h3>
+                <p>
+                    Como se mencionó anteriormente, dado que los datos contenían información de latitud y longitud, se decidió crear un mapa también relacionado con las visualizaciones anteriores para poder visualizar los registros geolocalizados. Dada la cantidad de registros, se decidió armar el mapa haciendo agrupamiento (clustering) de los íconos para hacer una mejor lectura del mapa.
+                </p>
+                <p>Un ejemplo del mismo:</p>
+                <img src="images/report/06.png" class="center-block" />
+                <p>
+                    Por otro lado, para el caso en el que el usuario esté visualizando los datos de todos los años al mismo tiempo, se agregó un botón para refrescar el mapa manualmente para disminuir la carga de procesamiento y hacer que las visualizaciones funcionen más fluidas.
+                </p>
+
+                <h3>Interacción</h3>
+                <p>
+                    Uno de los principales objetivos de este proyecto era el desarrollo de visualizaciones que funcionaran de manera conjunta para que el usuario pueda hacer un análisis interactivo más sofisticado de la información.
+                </p>
+                <p>
+                    De esta manera, y utilizando la librería dc.js, fue que se logró que todas las visualizaciones estén correlacionadas, es decir que los filtros aplicados a una visualización son aplicados a las restantes. Esto tiene un gran potencial para análisis porque no es necesario hacer múltiples visualizaciones para distintos escenarios.
+                </p>
+                <p>
+                    A continuación se mencionan algunos ejemplos de análisis y cómo lograr los mismos utilizando las visualizaciones implementadas.
+                </p>
+
+                <h4>Cantidad de eventos de atención médica en domicilio reportados en el 2015</h4>
+                <ol>
+                    <li>Seleccionar “ATENCIÓN MÉDICA EN DOMICILIOS” en la visualización de eventos</li>
+                    <li>Seleccionar el año 2015 en la visualización de años</li>
+                    <li>Luego se puede ver la cantidad total de eventos de ese tipo en el año o para cada mes en las respectivas visualizaciones</li>
+                </ol>
+                <p>
+                    Las visualizaciones resultantes pueden verse a continuación:
+                </p>
+                <img src="images/report/07.png" class="center-block" />
+
+                <h4>Ubicación a donde se solicitó atención médica en la vía pública</h4>
+                <ol>
+                    <li>Seleccionar “ATENCIÓN MÉDICA EN VÍA PÚBLICA” en la visualización de eventos</li>
+                    <li>Luego ir al mapa y ver todos los eventos con sus ubicaciones y fechas.</li>
+                    <li>Si la cantidad de eventos es muy grande, estos se pueden filtrar utilizando la línea de tiempo o las visualizaciones de años y meses.</li>
+                </ol>
+                <p>Resultado:</p>
+                <img src="images/report/08.png" class="center-block" />
+
+                <h4>Evolución de la cantidad de eventos de accidentes de tránsito reportados entre Diciembre de 2013 y Febrero del 2014</h4>
+                <ol>
+                    <li>Seleccionar “ACCIDENTE DE TRÁNSITO”</li>
+                    <li>Seleccionar 2013 y 2014</li>
+                    <li>Seleccionar Diciembre, Enero y Febrero (esto seleccionará los meses de ambos años)</li>
+                    <li>Hacer zoom en la línea de tiempo para ver los eventos solamente entre el rango de fechas deseado</li>
+                </ol>
+                <img src="images/report/09.png" class="center-block" />
+
+                <!-- #######################  RESULTADOS OBTENIDOS  ####################### -->
+                <h2>Resultados obtenidos</h2>
+                <p>
+                    Gracias a las visualizaciones implementadas y su ágil manipulación para hacer exploración de los datos, se hizo un análisis de las inquietudes planteadas al comienzo de este informe.
+                </p>
+
+                <h3>Momentos llamativos</h3>
+                <p>
+                    Haciendo un análisis simple de la línea de tiempo se pueden detectar inmediatamente distintos momentos donde la cantidad de eventos fue llamativamente superior al promedio.
+                </p>
+                <p>
+                    En la siguiente captura se puede observar lo antes indicado y algunos de los puntos donde se reportó una cantidad significativa de eventos:
+                </p>
+                <img src="images/report/10.jpg" class="center-block" />
+                <p>
+                    De estas observaciones podemos detectar que el día que más reportes hubo fue el 15 de Abril de 2013. Si filtramos nuestros datos a ese único día de Abril del 2013 podemos ver lo siguiente:
+                </p>
+                <img src="images/report/11.png" class="center-block" />
+                <p>
+                    De manera automática podemos ver que casi el 80% de los reclamos del día fueron específicamente por reclamos por olores en Bahía Blanca.
+                </p>
+                <p>
+                    Luego, podríamos querer ver la ubicación a donde se hicieron dichos reclamos, para esto podemos observar el mapa de eventos que se filtran a partir de los otros filtros seleccionados:
+                </p>
+                <img src="images/report/12.png" class="center-block" />
+                <p>
+                    Algo tal vez llamativo es que todos los reclamos fueron realizados sobre la zona Oeste de la ciudad, lo que podría dar indicios de algún evento ocurrido en dicha zona.
+                </p>
+
+                <h3>Cantidad de eventos en fechas particulares</h3>
+                <p>
+                    Para este análisis se acotó el tipo de evento a accidentes de tránsito, y se consideraron las festividades de Navidad y Año Nuevo del año 2015, y los cambios de quincena de Enero de 2016.
+                </p>
+                <p>
+                    Filtrando los datos para hacer análisis deseado, obtenemos lo siguiente:
+                </p>
+                <img src="images/report/13.jpg" class="center-block" />
+                <p>
+                    Al contrario de lo que la intuición podría indicar, podemos observar que la cantidad de accidentes reportados no fue alta en Navidad ni Año Nuevo. Inclusive, en el caso de Año Nuevo bajaron a pesar de que uno podría suponer que la cantidad de accidentes debería aumentar en la madrugada del primero de Enero.
+                </p>
+                <p>
+                    Por otro lado, si consideramos la segunda quincena de Enero, podemos ver como el 17 de Enero (domingo) aumentó notablemente la cantidad de accidentes lo que podría estar asociado al recambio de gente entre la primera y la segunda quincena de 2016.
+                </p>
+                <p>
+                    A pesar de los resultados encontrados, es importante recordar que los datos hacen referencia a los llamados al 911, por lo que la cantidad de accidentes podría ser mayor.
+                </p>
+
+                <h3>Los meses y años donde hubieron más llamados al 911</h3>
+                <p>
+                    Esta inquietud se puede responder rápidamente mirando de manera directa las visualizaciones de la cantidad total de eventos por año y por mes como se ve a continuación:
+                </p>
+                <img src="images/report/14.png" class="center-block" />
+                <p>
+                    Luego, podemos concluir que el año 2010 fue hasta ahora el año con mayor cantidad de eventos reportados al 911, y el mes con más reportes fue Diciembre.
+                </p>
+                <p>
+                    Hay que considerar que la cantidad de eventos por mes es la suma de eventos en ese mes para todos los años. Luego, si quisiéramos saber la cantidad total de eventos para Diciembre pero solo para 2010, la visualización sería la siguiente luego de aplicar el filtro en los años:
+                </p>
+                <img src="images/report/15.png" class="center-block" />
+                <p>
+                    Nuevamente se puede concluir que Diciembre es el mes con la mayor cantidad de eventos reportados pero en este caso es solo considerando el año 2010.
+                </p>
+
+                <h3>Llamados del mismo tipo desde un mismo lugar</h3>
+                <p>
+                    Este planteo es algo amplio de contestar, pero podríamos hacer un análisis para distintos tipos de eventos.
+                </p>
+                <p>
+                    Si consideramos un caso obvio, podríamos filtrar los eventos por “ATENCIÓN MÉDICA EN COMISARÍAS” que es un tipo de evento donde la ubicación reportada haya sido la misma o similar para distintos llamados. Luego de filtrar los resultados por el evento antes mencionado y hacer un zoom en el mapa podemos ver lo siguiente:
+                </p>
+                <img src="images/report/16.png" class="center-block" />
+                <p>
+                    Luego, si hacemos click sobre el agrupamiento de 39 elementos:
+                </p>
+                <img src="images/report/17.png" class="center-block" />
+                <p>
+                    De esta forma se puede ver que existen reportes del mismo tipo de evento desde un mismo lugar.
+                </p>
+                <p>
+                    Por otro lado, consideremos otro tipo de evento como “RECLAMOS POR TALA DE ÁRBOLES”, luego de filtrar los datos y hacer zoom en el mapa, podemos ver algo como:
+                </p>
+                <img src="images/report/18.png" class="center-block" />
+                <p>
+                    A diferencia del caso anterior, no existen tantos casos donde se repita el reporte del mismo evento desde un mismo lugar. Si hacemos zoom en el agrupamiento de 7 elementos:
+                </p>
+                <img src="images/report/19.png" class="center-block" />
+                <p>
+                    A pesar de que el agrupamiento era de 7 elementos podemos ver que finalmente el agrupamiento era solo de 5 elementos ya que otros 2 eran de lugares cercanos con distinta información de geolocalización.
+                </p>
+                <p>
+                    Luego, algo llamativo es que si analizamos cada uno de los elementos podemos ver que corresponden a los siguientes registros con sus respectivos domicilios y día y hora:
+                    <ol>
+                        <li>SARMIENTO 300, 2011/09/03 10:27:38</li>
+                        <li>AVDA ALEM, 2012/11/03 17:28:31</li>
+                        <li>SARMIENTO 300, 2013/01/13 11:35:02</li>
+                        <li>AVDA ALEM esq. SARMIENTO, 2015/08/04 08:11:34</li>
+                        <li>AVDA ALEM esq. SARMIENTO, 2016/01/04 08:02:22</li>
+                    </ol>
+                </p>
+                <p>
+                    Luego podemos observar que al parecer se hizo un reclamo del mismo tipo por reiterados años y para un mismo lugar. Esto podría ayudar a detectar algún tipo de problema con los árboles de la zona o vecinos talando árboles de manera ilegal ya que la Municipalidad es la entidad oficial de cumplir con este tipo de tareas.
+                </p>
+
+                <h2>Conclusiones</h2>
+                <p>
+                    A lo largo del informe se explicó todo el proceso llevado a cabo desde el planteamiento de inquietudes a contestar, qué tipo de procesamiento de los datos debió hacerse, qué visualizaciones eran útiles para poder hacer el análisis, las herramientas seleccionadas para hacer el desarrollo y finalmente el análisis de la información utilizando las visualizaciones interactivas como medio para poder interpretar y extraer conocimiento de los datos en crudo.
+                </p>
+                <p>
+                    Además, se pudo demostrar que las visualizaciones fueron de gran ayuda para contestar muy rápidamente a todos los planteos que se hicieron al comienzo del proyecto, lo que refuerza la gran utilidad de hacer buenas visualizaciones para el análisis de información, permitiendo que cualquier persona pueda sacar conclusiones utilizando las mismas.
+                </p>
+            </div>
+
+            <div class="col-md-1"></div>
+        </div>
+    </div>
+  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+</body>
+
+</html>
