@@ -31,7 +31,6 @@
             </div>
             <div id="navbar" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href="index.html">Home</a></li>
                     <li class="active"><a href="#">Informe</a></li>
                     <li><a href="vis.html">Visualización de datos</a></li>
                     <li><a href="about.html">Acerca de</a></li>
@@ -75,7 +74,7 @@
                 <p>
                     El servicio más precisamente se detalla a continuación:
                     <ul>
-                        <li>URL de acceso: <a href="http://bahiablanca.gov.ar:8080/Publico/qpbb">http://bahiablanca.gov.ar:8080/Publico/qpbb</a></li>
+                        <li>URL de acceso: <a target="_blank" href="http://bahiablanca.gov.ar:8080/Publico/qpbb">http://bahiablanca.gov.ar:8080/Publico/qpbb</a></li>
                         <li>Parámetro: f1. Permite fijar la fecha de inicio de los resultados a buscar.</li>
                         <li>Parámetro: f2. Permite fijar la fecha de fin de los resultados a buscar.</li>
                     </ul>
@@ -104,7 +103,7 @@
                     </pre>
                 </p>
                 <p>
-                    Dado que este formato no era cómodo para trabajar con librerías de visualización basadas en Javascript, se optó por transformar los datos a <a href="https://en.wikipedia.org/wiki/Tab-separated_values">TSV</a> (tab-separated values) debido a que el archivo de datos final sería más liviano que un JSON, lo que haría más rápida la carga de datos en el lado del cliente al momento de cargar las visualizaciones.
+                    Dado que este formato no era cómodo para trabajar con librerías de visualización basadas en Javascript, se optó por transformar los datos a <a target="_blank" href="https://en.wikipedia.org/wiki/Tab-separated_values">TSV</a> (tab-separated values) debido a que el archivo de datos final sería más liviano que un JSON, lo que haría más rápida la carga de datos en el lado del cliente al momento de cargar las visualizaciones.
                 </p>
 
                 <h3>Modificación de formato de campo fecha</h3>
@@ -149,7 +148,7 @@
 
                 <h3>Herramienta utilizada</h3>
                 <p>
-                    Para realizar la transformación de XML a TSV, modificación y limpieza del dataset se decidió utilizar la herramienta <a href="http://openrefine.org/">OpenRefine</a> dada su facilidad de poder ejecutar cada uno de los pasos y poder corregir errores utilizando sus opciones de deshacer y rehacer.
+                    Para realizar la transformación de XML a TSV, modificación y limpieza del dataset se decidió utilizar la herramienta <a target="_blank" href="http://openrefine.org/">OpenRefine</a> dada su facilidad de poder ejecutar cada uno de los pasos y poder corregir errores utilizando sus opciones de deshacer y rehacer.
                 </p>
 
                 <!-- #######################  Elección de herramientas a utilizar  ####################### -->
@@ -158,10 +157,10 @@
                     Para el desarrollo del proyecto se comenzó haciendo algunas pruebas de concepto utilizando la herramienta Tableau. A pesar de su facilidad para crear visualizaciones, se encontraron algunas limitaciones a la hora de organizar los filtros disponibles para lograr un tablero (<i>dashboard</i>) que sea cómodo de utilizar. Además, el proyecto corriendo desde el servicio Tableau Public funcionaba algo lento para lo que se pretendía originalmente.
                 </p>
                 <p>
-                    Por esta razón, se optó por hacer un desarrollo utilizando tecnologías web como Javascript, librerías de visualización basadas en el mismo lenguaje, y <a href="http://getbootstrap.com/">Bootstrap</a> para el maquetado HTML dado el potencial y flexibilidad que proveen para desarrollar proyectos de este tipo.
+                    Por esta razón, se optó por hacer un desarrollo utilizando tecnologías web como Javascript, librerías de visualización basadas en el mismo lenguaje, y <a target="_blank" href="http://getbootstrap.com/">Bootstrap</a> para el maquetado HTML dado el potencial y flexibilidad que proveen para desarrollar proyectos de este tipo.
                 </p>
                 <p>
-                    Luego de hacer una investigación de las distintas herramientas disponibles como D3.js o librerías basadas en ella, u otras librerías independientes como p5.js, se decidió utilizar la librería <a href="http://dc-js.github.io/dc.js/">dc.js : Dimensional Charting Javascript Library</a> basada en las librerías <a href="https://d3js.org/">D3.js</a> y <a href="http://square.github.io/crossfilter/">crossfilter</a>.
+                    Luego de hacer una investigación de las distintas herramientas disponibles como D3.js o librerías basadas en ella, u otras librerías independientes como p5.js, se decidió utilizar la librería <a target="_blank" href="http://dc-js.github.io/dc.js/">dc.js : Dimensional Charting Javascript Library</a> basada en las librerías <a target="_blank" href="https://d3js.org/">D3.js</a> y <a target="_blank" href="http://square.github.io/crossfilter/">crossfilter</a>.
                 </p>
                 <p>
                     Las posibilidades que brinda la librería dc.js hicieron que no quedaran dudas que esta librería era ideal para el desarrollo del proyecto, ya que cumplía con las siguientes características:
