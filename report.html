@@ -88,19 +88,17 @@
                 <h3>Formato original de los datos</h3>
                 <p>
                     Oficialmente el servicio antes descripto retorna los resultados en formato XML, por ejemplo:
-                    <pre>
-                        &lt;items&gt;
-                            &lt;item&gt;
-                                &lt;fecha&gt;01/01/2016 00:03:57&lt;/fecha&gt;
-                                &lt;evento&gt;ATENCION MEDICA EN DOMICILIOS&lt;/evento&gt;
-                                &lt;domicilio&gt;DR NARCISO MALLEA 6000&lt;/domicilio&gt;
-                                &lt;localidad&gt;BAHIA BLANCA&lt;/localidad&gt;
-                                &lt;lat&gt;-38,69007&lt;/lat&gt;
-                                &lt;lng&gt;-62,27739&lt;/lng&gt;
-                            &lt;/item&gt;
-                            …
-                        &lt;/items&gt;
-                    </pre>
+<pre>&lt;items&gt;
+    &lt;item&gt;
+        &lt;fecha&gt;01/01/2016 00:03:57&lt;/fecha&gt;
+        &lt;evento&gt;ATENCION MEDICA EN DOMICILIOS&lt;/evento&gt;
+        &lt;domicilio&gt;DR NARCISO MALLEA 6000&lt;/domicilio&gt;
+        &lt;localidad&gt;BAHIA BLANCA&lt;/localidad&gt;
+        &lt;lat&gt;-38,69007&lt;/lat&gt;
+        &lt;lng&gt;-62,27739&lt;/lng&gt;
+    &lt;/item&gt;
+    …
+&lt;/items&gt;</pre>
                 </p>
                 <p>
                     Dado que este formato no era cómodo para trabajar con librerías de visualización basadas en Javascript, se optó por transformar los datos a <a target="_blank" href="https://en.wikipedia.org/wiki/Tab-separated_values">TSV</a> (tab-separated values) debido a que el archivo de datos final sería más liviano que un JSON, lo que haría más rápida la carga de datos en el lado del cliente al momento de cargar las visualizaciones.
