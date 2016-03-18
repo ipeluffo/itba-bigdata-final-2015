@@ -73,10 +73,7 @@ function initializeYearsVisualization(xfilter) {
         .elasticX(true);
 
     yearVis.xAxis()
-        .ticks(5)
-        .tickFormat(function (value) {
-            return value;
-        });
+        .ticks(5);
 }
 
 function initializeMonthsVisualization(xfilter) {
@@ -101,10 +98,7 @@ function initializeMonthsVisualization(xfilter) {
         .elasticX(true);
 
     monthsVis.xAxis()
-        .ticks(4)
-        .tickFormat(function (value) {
-            return value;
-        });
+        .ticks(4);
 }
 
 function initializeEventsVisualization(xfilter) {
@@ -140,11 +134,6 @@ function initializeEventsVisualization(xfilter) {
                 timeLineRangeVis.colors(function () { return color; });
         })
         .colors(d3.scale.category20());
-
-    eventsVis.xAxis()
-        .tickFormat(function (value) {
-            return value;
-        });
 }
 
 function initializeTimelineVisualization(xfilter) {
