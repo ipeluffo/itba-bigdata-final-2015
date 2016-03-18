@@ -138,7 +138,8 @@ function initializeEventsVisualization(xfilter) {
 
             timeLineVis.colors(function () { return color; });
                 timeLineRangeVis.colors(function () { return color; });
-        });
+        })
+        .colors(d3.scale.category20());
 
     eventsVis.xAxis()
         .tickFormat(function (value) {
