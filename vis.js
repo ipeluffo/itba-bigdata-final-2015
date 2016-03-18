@@ -65,7 +65,7 @@ function initializeYearsVisualization(xfilter) {
         .dimension(yearDimension)
         .group(yearGroup)
         .label(function (d) {
-            return d.key + ' : ' + d.value;
+            return d.key + ' : ' + d.value.toLocaleString();
         })
         .colors(function() {
             return "#1F77B4";
@@ -90,7 +90,7 @@ function initializeMonthsVisualization(xfilter) {
         .dimension(monthDimension)
         .group(monthGroup)
         .label(function (d) {
-            return months[d.key] + ' : ' + d.value;
+            return months[d.key] + ' : ' + d.value.toLocaleString();
         })
         .colorAccessor(function () {
             return "blue";
@@ -115,7 +115,7 @@ function initializeEventsVisualization(xfilter) {
         .dimension(eventDimension)
         .group(eventGroup)
         .label(function (d) {
-            return d.key + ' : ' + d.value;
+            return d.key + ' : ' + d.value.toLocaleString();
         })
         .title(function (d) {
             return d.value;
@@ -162,7 +162,7 @@ function initializeTimelineVisualization(xfilter) {
         .rangeChart(timeLineRangeVis)
         .transitionDuration(500)
         .title(function (d) {
-            return moment(d.key).format('DD/MM/YYYY') + " : " + d.value;
+            return moment(d.key).format('DD/MM/YYYY') + " : " + d.value.toLocaleString();
         })
         .filterPrinter(function (filters) {
             var dateFormat = 'DD/MM/YYYY';
