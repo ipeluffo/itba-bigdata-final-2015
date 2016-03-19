@@ -1,0 +1,1366 @@
+[
+  {
+    "op": "core/column-addition",
+    "description": "Create column localidad null at index 6 based on column item - localidad using expression grel:value == null",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "newColumnName": "localidad null",
+    "columnInsertIndex": 6,
+    "baseColumnName": "item - localidad",
+    "expression": "grel:value == null",
+    "onError": "set-to-blank"
+  },
+  {
+    "op": "core/row-removal",
+    "description": "Remove rows",
+    "engineConfig": {
+      "facets": [
+        {
+          "expression": "value",
+          "invert": false,
+          "selectError": false,
+          "omitError": false,
+          "name": "localidad null",
+          "selectBlank": false,
+          "columnName": "localidad null",
+          "omitBlank": false,
+          "type": "list",
+          "selection": [
+            {
+              "v": {
+                "v": true,
+                "l": "true"
+              }
+            }
+          ]
+        }
+      ],
+      "mode": "row-based"
+    }
+  },
+  {
+    "op": "core/column-removal",
+    "description": "Remove column localidad null",
+    "columnName": "localidad null"
+  },
+  {
+    "op": "core/column-rename",
+    "description": "Rename column item - lng to lng",
+    "oldColumnName": "item - lng",
+    "newColumnName": "lng"
+  },
+  {
+    "op": "core/column-rename",
+    "description": "Rename column item - lat to lat",
+    "oldColumnName": "item - lat",
+    "newColumnName": "lat"
+  },
+  {
+    "op": "core/column-rename",
+    "description": "Rename column item - fecha to fecha",
+    "oldColumnName": "item - fecha",
+    "newColumnName": "fecha"
+  },
+  {
+    "op": "core/column-rename",
+    "description": "Rename column item - evento to evento",
+    "oldColumnName": "item - evento",
+    "newColumnName": "evento"
+  },
+  {
+    "op": "core/column-rename",
+    "description": "Rename column item - localidad to localidad",
+    "oldColumnName": "item - localidad",
+    "newColumnName": "localidad"
+  },
+  {
+    "op": "core/column-rename",
+    "description": "Rename column item - domicilio to domicilio",
+    "oldColumnName": "item - domicilio",
+    "newColumnName": "domicilio"
+  },
+  {
+    "op": "core/text-transform",
+    "description": "Text transform on cells in column localidad using expression value.trim()",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "localidad",
+    "expression": "value.trim()",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10
+  },
+  {
+    "op": "core/text-transform",
+    "description": "Text transform on cells in column evento using expression value.trim()",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "evento",
+    "expression": "value.trim()",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10
+  },
+  {
+    "op": "core/text-transform",
+    "description": "Text transform on cells in column domicilio using expression value.trim()",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "domicilio",
+    "expression": "value.trim()",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10
+  },
+  {
+    "op": "core/text-transform",
+    "description": "Text transform on cells in column localidad using expression grel:if (value.toLowercase().contains(\"bahia\"), \"BAHIA BLANCA\", value)",
+    "engineConfig": {
+      "facets": [
+        {
+          "to": 10000,
+          "expression": "grel:facetCount(value, \"value\", \"localidad\")",
+          "selectError": true,
+          "selectNumeric": true,
+          "selectBlank": true,
+          "name": "localidad",
+          "columnName": "localidad",
+          "selectNonNumeric": true,
+          "from": 0,
+          "type": "range"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "localidad",
+    "expression": "grel:if (value.toLowercase().contains(\"bahia\"), \"BAHIA BLANCA\", value)",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10
+  },
+  {
+    "op": "core/text-transform",
+    "description": "Text transform on cells in column localidad using expression grel:if (value.toLowercase().contains(\"white\"), \"ING. WHITE\", value)",
+    "engineConfig": {
+      "facets": [
+        {
+          "to": 20000,
+          "expression": "grel:facetCount(value, \"value\", \"localidad\")",
+          "selectError": true,
+          "selectNumeric": true,
+          "selectBlank": true,
+          "name": "localidad",
+          "columnName": "localidad",
+          "selectNonNumeric": true,
+          "from": 0,
+          "type": "range"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "localidad",
+    "expression": "grel:if (value.toLowercase().contains(\"white\"), \"ING. WHITE\", value)",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10
+  },
+  {
+    "op": "core/text-transform",
+    "description": "Text transform on cells in column localidad using expression grel:if (value.toLowercase().contains(\"uns\"), \"BAHIA BLANCA\", value)",
+    "engineConfig": {
+      "facets": [
+        {
+          "to": 20000,
+          "expression": "grel:facetCount(value, \"value\", \"localidad\")",
+          "selectError": true,
+          "selectNumeric": true,
+          "selectBlank": true,
+          "name": "localidad",
+          "columnName": "localidad",
+          "selectNonNumeric": true,
+          "from": 0,
+          "type": "range"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "localidad",
+    "expression": "grel:if (value.toLowercase().contains(\"uns\"), \"BAHIA BLANCA\", value)",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10
+  },
+  {
+    "op": "core/text-transform",
+    "description": "Text transform on cells in column lng using expression grel:value.replace(\",\",\".\")",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "lng",
+    "expression": "grel:value.replace(\",\",\".\")",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10
+  },
+  {
+    "op": "core/text-transform",
+    "description": "Text transform on cells in column lat using expression value.toNumber()",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "lat",
+    "expression": "value.toNumber()",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10
+  },
+  {
+    "op": "core/text-transform",
+    "description": "Text transform on cells in column lng using expression value.toNumber()",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "lng",
+    "expression": "value.toNumber()",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10
+  },
+  {
+    "op": "core/text-transform",
+    "description": "Text transform on cells in column lat using expression grel:value.replace(\",\",\".\")",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "lat",
+    "expression": "grel:value.replace(\",\",\".\")",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10
+  },
+  {
+    "op": "core/text-transform",
+    "description": "Text transform on cells in column lat using expression value.toNumber()",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "lat",
+    "expression": "value.toNumber()",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10
+  },
+  {
+    "op": "core/text-transform",
+    "description": "Text transform on cells in column localidad using expression grel:if ( and(cells[\"lng\"].value > -62.318916, and(cells[\"lng\"].value < -62.19738, and(cells[\"lat\"].value < -38.651577, cells[\"lat\"].value > -38.76091))), \"BAHIA BLANCA\", value )",
+    "engineConfig": {
+      "facets": [
+        {
+          "to": 10000,
+          "expression": "grel:facetCount(value, \"value\", \"localidad\")",
+          "selectError": true,
+          "selectNumeric": true,
+          "selectBlank": true,
+          "name": "localidad",
+          "columnName": "localidad",
+          "selectNonNumeric": true,
+          "from": 0,
+          "type": "range"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "localidad",
+    "expression": "grel:if ( and(cells[\"lng\"].value > -62.318916, and(cells[\"lng\"].value < -62.19738, and(cells[\"lat\"].value < -38.651577, cells[\"lat\"].value > -38.76091))), \"BAHIA BLANCA\", value )",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10
+  },
+  {
+    "op": "core/text-transform",
+    "description": "Text transform on cells in column localidad using expression grel:if (value.toLowercase().contains(\"cerri\"), \"GRAL. DANIEL CERRI\", value)",
+    "engineConfig": {
+      "facets": [
+        {
+          "to": 20000,
+          "expression": "grel:facetCount(value, \"value\", \"localidad\")",
+          "selectError": true,
+          "selectNumeric": true,
+          "selectBlank": true,
+          "name": "localidad",
+          "columnName": "localidad",
+          "selectNonNumeric": true,
+          "from": 0,
+          "type": "range"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "localidad",
+    "expression": "grel:if (value.toLowercase().contains(\"cerri\"), \"GRAL. DANIEL CERRI\", value)",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10
+  },
+  {
+    "op": "core/text-transform",
+    "description": "Text transform on cells in column localidad using expression grel:\"BAHIA BLANCA\"",
+    "engineConfig": {
+      "facets": [
+        {
+          "invert": false,
+          "expression": "value",
+          "selectError": false,
+          "omitError": false,
+          "selectBlank": false,
+          "name": "localidad",
+          "omitBlank": false,
+          "columnName": "localidad",
+          "type": "list",
+          "selection": [
+            {
+              "v": {
+                "v": "NIL",
+                "l": "NIL"
+              }
+            }
+          ]
+        },
+        {
+          "to": 20000,
+          "expression": "grel:facetCount(value, \"value\", \"localidad\")",
+          "selectError": true,
+          "selectNumeric": true,
+          "selectBlank": true,
+          "name": "localidad",
+          "columnName": "localidad",
+          "selectNonNumeric": true,
+          "from": 0,
+          "type": "range"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "localidad",
+    "expression": "grel:\"BAHIA BLANCA\"",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column localidad",
+    "engineConfig": {
+      "facets": [
+        {
+          "to": 20000,
+          "expression": "grel:facetCount(value, \"value\", \"localidad\")",
+          "selectError": true,
+          "selectNumeric": true,
+          "selectBlank": true,
+          "name": "localidad",
+          "columnName": "localidad",
+          "selectNonNumeric": true,
+          "from": 0,
+          "type": "range"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "localidad",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "PORTAL DE BELEN",
+          "( PORTAL DE BELEN )"
+        ],
+        "to": "PORTAL DE BELEN"
+      },
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "RUTA 35 Y SEQUICENTENARIO",
+          "SEQUICENTENARIO Y RUTA 35"
+        ],
+        "to": "BAHIA BLANCA"
+      },
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "25 DE MAYO Y CHICLANA",
+          "CHICLANA Y 25 DE MAYO"
+        ],
+        "to": "BAHIA BLANCA"
+      }
+    ]
+  },
+  {
+    "op": "core/text-transform",
+    "description": "Text transform on cells in column localidad using expression grel:\"ING. WHITE\"",
+    "engineConfig": {
+      "facets": [
+        {
+          "invert": false,
+          "expression": "value",
+          "selectError": false,
+          "omitError": false,
+          "selectBlank": false,
+          "name": "localidad",
+          "omitBlank": false,
+          "columnName": "localidad",
+          "type": "list",
+          "selection": [
+            {
+              "v": {
+                "v": "GRAL. E. MOSCONI",
+                "l": "GRAL. E. MOSCONI"
+              }
+            }
+          ]
+        },
+        {
+          "to": 20000,
+          "expression": "grel:facetCount(value, \"value\", \"localidad\")",
+          "selectError": true,
+          "selectNumeric": true,
+          "selectBlank": true,
+          "name": "localidad",
+          "columnName": "localidad",
+          "selectNonNumeric": true,
+          "from": 0,
+          "type": "range"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "localidad",
+    "expression": "grel:\"ING. WHITE\"",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10
+  },
+  {
+    "op": "core/text-transform",
+    "description": "Text transform on cells in column localidad using expression grel:\"BAHIA BLANCA\"",
+    "engineConfig": {
+      "facets": [
+        {
+          "invert": false,
+          "expression": "value",
+          "selectError": false,
+          "omitError": false,
+          "selectBlank": false,
+          "name": "localidad",
+          "omitBlank": false,
+          "columnName": "localidad",
+          "type": "list",
+          "selection": [
+            {
+              "v": {
+                "v": "PORTAL DE BELEN",
+                "l": "PORTAL DE BELEN"
+              }
+            }
+          ]
+        },
+        {
+          "to": 20000,
+          "expression": "grel:facetCount(value, \"value\", \"localidad\")",
+          "selectError": true,
+          "selectNumeric": true,
+          "selectBlank": true,
+          "name": "localidad",
+          "columnName": "localidad",
+          "selectNonNumeric": true,
+          "from": 0,
+          "type": "range"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "localidad",
+    "expression": "grel:\"BAHIA BLANCA\"",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10
+  },
+  {
+    "op": "core/text-transform",
+    "description": "Text transform on cells in column localidad using expression grel:if (value.toLowercase().contains(\"cabildo\"), \"CABILDO\", value)",
+    "engineConfig": {
+      "facets": [
+        {
+          "to": 10000,
+          "expression": "grel:facetCount(value, \"value\", \"localidad\")",
+          "selectError": true,
+          "selectNumeric": true,
+          "selectBlank": true,
+          "name": "localidad",
+          "columnName": "localidad",
+          "selectNonNumeric": true,
+          "from": 0,
+          "type": "range"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "localidad",
+    "expression": "grel:if (value.toLowercase().contains(\"cabildo\"), \"CABILDO\", value)",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10
+  },
+  {
+    "op": "core/text-transform",
+    "description": "Text transform on cells in column localidad using expression grel:if ( and(cells[\"lng\"].value > -62.357437, and(cells[\"lng\"].value < -62.155308, and(cells[\"lat\"].value < -38.651577, cells[\"lat\"].value > -38.764758))), \"BAHIA BLANCA\", value )",
+    "engineConfig": {
+      "facets": [
+        {
+          "to": 10000,
+          "expression": "grel:facetCount(value, \"value\", \"localidad\")",
+          "selectError": true,
+          "selectNumeric": true,
+          "selectBlank": true,
+          "name": "localidad",
+          "columnName": "localidad",
+          "selectNonNumeric": true,
+          "from": 0,
+          "type": "range"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "localidad",
+    "expression": "grel:if ( and(cells[\"lng\"].value > -62.357437, and(cells[\"lng\"].value < -62.155308, and(cells[\"lat\"].value < -38.651577, cells[\"lat\"].value > -38.764758))), \"BAHIA BLANCA\", value )",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10
+  },
+  {
+    "op": "core/text-transform",
+    "description": "Text transform on cells in column localidad using expression grel:if ( and(cells[\"lng\"].value > -62.414612, and(cells[\"lng\"].value < -62.38018, and(cells[\"lat\"].value > -38.724636, cells[\"lat\"].value < -38.694469))), \"GRAL. DANIEL CERRI\", value )",
+    "engineConfig": {
+      "facets": [
+        {
+          "invert": true,
+          "expression": "value",
+          "selectError": false,
+          "omitError": false,
+          "selectBlank": false,
+          "name": "localidad",
+          "omitBlank": false,
+          "columnName": "localidad",
+          "type": "list",
+          "selection": [
+            {
+              "v": {
+                "v": "CABILDO",
+                "l": "CABILDO"
+              }
+            },
+            {
+              "v": {
+                "v": "PUNTA ALTA",
+                "l": "PUNTA ALTA"
+              }
+            },
+            {
+              "v": {
+                "v": "GRAL. DANIEL CERRI",
+                "l": "GRAL. DANIEL CERRI"
+              }
+            },
+            {
+              "v": {
+                "v": "ING. WHITE",
+                "l": "ING. WHITE"
+              }
+            }
+          ]
+        },
+        {
+          "to": 10000,
+          "expression": "grel:facetCount(value, \"value\", \"localidad\")",
+          "selectError": true,
+          "selectNumeric": true,
+          "selectBlank": true,
+          "name": "localidad",
+          "columnName": "localidad",
+          "selectNonNumeric": true,
+          "from": 0,
+          "type": "range"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "localidad",
+    "expression": "grel:if ( and(cells[\"lng\"].value > -62.414612, and(cells[\"lng\"].value < -62.38018, and(cells[\"lat\"].value > -38.724636, cells[\"lat\"].value < -38.694469))), \"GRAL. DANIEL CERRI\", value )",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10
+  },
+  {
+    "op": "core/text-transform",
+    "description": "Text transform on cells in column localidad using expression grel:if ( and(cells[\"lng\"].value > -62.283769, and(cells[\"lng\"].value < -62.251754, and(cells[\"lat\"].value > -38.793178, cells[\"lat\"].value < -38.775783))), \"ING. WHITE\", value )",
+    "engineConfig": {
+      "facets": [
+        {
+          "invert": true,
+          "expression": "value",
+          "selectError": false,
+          "omitError": false,
+          "selectBlank": false,
+          "name": "localidad",
+          "omitBlank": false,
+          "columnName": "localidad",
+          "type": "list",
+          "selection": [
+            {
+              "v": {
+                "v": "CABILDO",
+                "l": "CABILDO"
+              }
+            },
+            {
+              "v": {
+                "v": "PUNTA ALTA",
+                "l": "PUNTA ALTA"
+              }
+            },
+            {
+              "v": {
+                "v": "GRAL. DANIEL CERRI",
+                "l": "GRAL. DANIEL CERRI"
+              }
+            },
+            {
+              "v": {
+                "v": "ING. WHITE",
+                "l": "ING. WHITE"
+              }
+            }
+          ]
+        },
+        {
+          "to": 10000,
+          "expression": "grel:facetCount(value, \"value\", \"localidad\")",
+          "selectError": true,
+          "selectNumeric": true,
+          "selectBlank": true,
+          "name": "localidad",
+          "columnName": "localidad",
+          "selectNonNumeric": true,
+          "from": 0,
+          "type": "range"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "localidad",
+    "expression": "grel:if ( and(cells[\"lng\"].value > -62.283769, and(cells[\"lng\"].value < -62.251754, and(cells[\"lat\"].value > -38.793178, cells[\"lat\"].value < -38.775783))), \"ING. WHITE\", value )",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10
+  },
+  {
+    "op": "core/column-addition-by-fetching-urls",
+    "description": "Create column reverse at index 6 by fetching URLs based on column localidad using expression grel:\"http://nominatim.openstreetmap.org/reverse?format=json&lat=\"+cells[\"lat\"].value+\"&lon=\"+cells[\"lng\"].value",
+    "engineConfig": {
+      "facets": [
+        {
+          "invert": true,
+          "expression": "value",
+          "selectError": false,
+          "omitError": false,
+          "selectBlank": false,
+          "name": "localidad",
+          "omitBlank": false,
+          "columnName": "localidad",
+          "type": "list",
+          "selection": [
+            {
+              "v": {
+                "v": "CABILDO",
+                "l": "CABILDO"
+              }
+            },
+            {
+              "v": {
+                "v": "PUNTA ALTA",
+                "l": "PUNTA ALTA"
+              }
+            },
+            {
+              "v": {
+                "v": "GRAL. DANIEL CERRI",
+                "l": "GRAL. DANIEL CERRI"
+              }
+            },
+            {
+              "v": {
+                "v": "ING. WHITE",
+                "l": "ING. WHITE"
+              }
+            }
+          ]
+        },
+        {
+          "to": 10000,
+          "expression": "grel:facetCount(value, \"value\", \"localidad\")",
+          "selectError": true,
+          "selectNumeric": true,
+          "selectBlank": true,
+          "name": "localidad",
+          "columnName": "localidad",
+          "selectNonNumeric": true,
+          "from": 0,
+          "type": "range"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "newColumnName": "reverse",
+    "columnInsertIndex": 6,
+    "baseColumnName": "localidad",
+    "urlExpression": "grel:\"http://nominatim.openstreetmap.org/reverse?format=json&lat=\"+cells[\"lat\"].value+\"&lon=\"+cells[\"lng\"].value",
+    "onError": "set-to-blank",
+    "delay": 300
+  },
+  {
+    "op": "core/text-transform",
+    "description": "Text transform on cells in column localidad using expression grel:if (cells[\"reverse\"].value.parseJson().address.get(\"city\") == null, value, cells[\"reverse\"].value.parseJson().address.get(\"city\"))",
+    "engineConfig": {
+      "facets": [
+        {
+          "invert": true,
+          "expression": "value",
+          "selectError": false,
+          "omitError": false,
+          "selectBlank": false,
+          "name": "localidad",
+          "omitBlank": false,
+          "columnName": "localidad",
+          "type": "list",
+          "selection": [
+            {
+              "v": {
+                "v": "CABILDO",
+                "l": "CABILDO"
+              }
+            },
+            {
+              "v": {
+                "v": "PUNTA ALTA",
+                "l": "PUNTA ALTA"
+              }
+            },
+            {
+              "v": {
+                "v": "GRAL. DANIEL CERRI",
+                "l": "GRAL. DANIEL CERRI"
+              }
+            },
+            {
+              "v": {
+                "v": "ING. WHITE",
+                "l": "ING. WHITE"
+              }
+            }
+          ]
+        },
+        {
+          "to": 10000,
+          "expression": "grel:facetCount(value, \"value\", \"localidad\")",
+          "selectError": true,
+          "selectNumeric": true,
+          "selectBlank": true,
+          "name": "localidad",
+          "columnName": "localidad",
+          "selectNonNumeric": true,
+          "from": 0,
+          "type": "range"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "localidad",
+    "expression": "grel:if (cells[\"reverse\"].value.parseJson().address.get(\"city\") == null, value, cells[\"reverse\"].value.parseJson().address.get(\"city\"))",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10
+  },
+  {
+    "op": "core/column-removal",
+    "description": "Remove column reverse",
+    "columnName": "reverse"
+  },
+  {
+    "op": "core/text-transform",
+    "description": "Text transform on cells in column localidad using expression grel:if (value.toLowercase().contains(\"blanca\"), \"BAHIA BLANCA\", \"INDEFINIDO\")",
+    "engineConfig": {
+      "facets": [
+        {
+          "invert": true,
+          "expression": "value",
+          "selectError": false,
+          "omitError": false,
+          "selectBlank": false,
+          "name": "localidad",
+          "omitBlank": false,
+          "columnName": "localidad",
+          "type": "list",
+          "selection": [
+            {
+              "v": {
+                "v": "PUNTA ALTA",
+                "l": "PUNTA ALTA"
+              }
+            },
+            {
+              "v": {
+                "v": "GRAL. DANIEL CERRI",
+                "l": "GRAL. DANIEL CERRI"
+              }
+            },
+            {
+              "v": {
+                "v": "ING. WHITE",
+                "l": "ING. WHITE"
+              }
+            },
+            {
+              "v": {
+                "v": "CABILDO",
+                "l": "CABILDO"
+              }
+            }
+          ]
+        },
+        {
+          "to": 10000,
+          "expression": "grel:facetCount(value, \"value\", \"localidad\")",
+          "selectError": true,
+          "selectNumeric": true,
+          "selectBlank": true,
+          "name": "localidad",
+          "columnName": "localidad",
+          "selectNonNumeric": true,
+          "from": 0,
+          "type": "range"
+        }
+      ],
+      "mode": "row-based"
+    },
+    "columnName": "localidad",
+    "expression": "grel:if (value.toLowercase().contains(\"blanca\"), \"BAHIA BLANCA\", \"INDEFINIDO\")",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10
+  },
+  {
+    "op": "core/column-removal",
+    "description": "Remove column item",
+    "columnName": "item"
+  },
+  {
+    "op": "core/text-transform",
+    "description": "Text transform on cells in column evento using expression value.trim()",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "evento",
+    "expression": "value.trim()",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column evento",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "evento",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "ACCIDENTE DE TRANSITO"
+        ],
+        "to": "0"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column evento",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "evento",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "ATENCION MEDICA A PARTURIENTAS"
+        ],
+        "to": "1"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column evento",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "evento",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "ATENCION MEDICA EN COMISARIAS"
+        ],
+        "to": "2"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column evento",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "evento",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "ATENCION MEDICA EN DOMICILIOS"
+        ],
+        "to": "3"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column evento",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "evento",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "ATENCION MEDICA EN ESCUELAS"
+        ],
+        "to": "4"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column evento",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "evento",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "ATENCION MEDICA EN UNIDADES SANITARIAS"
+        ],
+        "to": "5"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column evento",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "evento",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "ATENCION MEDICA EN VIA PUBLICA"
+        ],
+        "to": "6"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column evento",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "evento",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "RECLAMOS POR ARBOLES CAIDOS O RAMAS"
+        ],
+        "to": "7"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column evento",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "evento",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "RECLAMOS POR BACHES EN VIA PUBLICA"
+        ],
+        "to": "8"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column evento",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "evento",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "RECLAMOS POR HUMO EN BAHIA BLANCA"
+        ],
+        "to": "9"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column evento",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "evento",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "RECLAMOS POR HUMO EN ZONA INDUSTRIAL"
+        ],
+        "to": "10"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column evento",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "evento",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "RECLAMOS POR OLORES EN BAHIA BLANCA"
+        ],
+        "to": "11"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column evento",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "evento",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "RECLAMOS POR OLORES EN ZONA INDUSTRIAL"
+        ],
+        "to": "12"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column evento",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "evento",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "RECLAMOS POR RUIDOS DE SIRENA EN EL POLO INDUSTRIAL"
+        ],
+        "to": "13"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column evento",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "evento",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "RECLAMOS POR TALA DE ARBOLES"
+        ],
+        "to": "14"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column evento",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "evento",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "SOLICITUD DE AMBULANCIA DESDE HOSPITALES"
+        ],
+        "to": "15"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column evento",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "evento",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "SUSTANCIAS PELIGROSAS - DCPBA - DERRAME QUIMICO"
+        ],
+        "to": "16"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column evento",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "evento",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "SUSTANCIAS PELIGROSAS - DCPBA - ESCAPE DE GAS"
+        ],
+        "to": "17"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column evento",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "evento",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "SUSTANCIAS PELIGROSAS - RESIDUOS PATOGENICOS"
+        ],
+        "to": "18"
+      }
+    ]
+  },
+  {
+    "op": "core/mass-edit",
+    "description": "Mass edit cells in column evento",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "evento",
+    "expression": "value",
+    "edits": [
+      {
+        "fromBlank": false,
+        "fromError": false,
+        "from": [
+          "TRASLADOS INTERHOSPITALARIOS"
+        ],
+        "to": "19"
+      }
+    ]
+  },
+  {
+    "op": "core/text-transform",
+    "description": "Text transform on cells in column lng using expression grel:value.toString().substring(0,10).toNumber()",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "lng",
+    "expression": "grel:value.toString().substring(0,10).toNumber()",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10
+  },
+  {
+    "op": "core/text-transform",
+    "description": "Text transform on cells in column lat using expression grel:value.toString().substring(0,10).toNumber()",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "lat",
+    "expression": "grel:value.toString().substring(0,10).toNumber()",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10
+  },
+  {
+    "op": "core/text-transform",
+    "description": "Text transform on cells in column fecha using expression grel:value.toDate(false).toString(\"y/MM/dd HH:mm:ss-0300\")",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "fecha",
+    "expression": "grel:value.toDate(false).toString(\"y/MM/dd HH:mm:ss-0300\")",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10
+  },
+  {
+    "op": "core/column-removal",
+    "description": "Remove column localidad",
+    "columnName": "localidad"
+  },
+  {
+    "op": "core/text-transform",
+    "description": "Text transform on cells in column fecha using expression grel:value.substring(0,19)",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "fecha",
+    "expression": "grel:value.substring(0,19)",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10
+  },
+  {
+    "op": "core/text-transform",
+    "description": "Text transform on cells in column domicilio using expression grel:if(value.lastIndexOf(\"0\") == -1, value, value.substring(0,value.lastIndexOf(\"0\")))",
+    "engineConfig": {
+      "facets": [],
+      "mode": "row-based"
+    },
+    "columnName": "domicilio",
+    "expression": "grel:if(value.lastIndexOf(\"0\") == -1, value, value.substring(0,value.lastIndexOf(\"0\")))",
+    "onError": "keep-original",
+    "repeat": false,
+    "repeatCount": 10
+  }
+]
