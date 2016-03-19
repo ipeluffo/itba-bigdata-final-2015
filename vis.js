@@ -352,13 +352,37 @@ function cleanDataForExport (data) {
     return dataForExport;
 }
 
-// Set listener to button to export data in CSV format
-$("#exportDataButton").click(function (element) {
+function prepareAndExportFilteredData(format) {
+    if (!format) {
+        return;
+    }
+
     $("#exportingDataModal").modal("show");
     setTimeout(function () {
         var filteredData = timeLineVis.dimension().bottom(Infinity);
         var cleanedData = cleanDataForExport(filteredData);
-        download(d3.csv.format(cleanedData), "datos.csv", "text/plain");
+
+        if (format === "csv") {
+            download(d3.csv.format(cleanedData), "datos.csv", "text/plain");
+        } else if (format === "tsv") {
+            download(d3.tsv.format(cleanedData), "datos.tsv", "text/plain");
+        } else {
+            download(JSON.stringify(cleanedData), "datos.json", "text/plain");
+        }
+
         $("#exportingDataModal").modal("hide");
     }, 500);
-})
+}
+
+// Set listener to button to export data in CSV format
+$("#exportCsvDataButton").click(function (element) {
+    prepareAndExportFilteredData("csv");
+});
+
+$("#exportTsvDataButton").click(function (element) {
+    prepareAndExportFilteredData("tsv");
+});
+
+$("#exportJsonDataButton").click(function (element) {
+    prepareAndExportFilteredData("json");
+});

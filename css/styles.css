@@ -347,13 +347,3 @@ g.dc-legend-item.fadeout {
 #dataCount {
     height: 22px;
 }
-
-div#exportDataButtonContainer {
-    height: 69px; 
-    line-height: 69px; 
-    /* text-align: right; */
-}
-
-button#exportDataButton {
-    vertical-align: bottom;
-}

@@ -37,13 +37,8 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-12">
                 <h1>Las llamadas al 911 de Bahía Blanca</h1>
-            </div>
-            <div class="col-md-4">
-                <div class="pull-right" id="exportDataButtonContainer">
-                    <button type="button" class="btn btn-info hidden" id="exportDataButton">Exportar datos filtrados (CSV)</button>
-                </div>
             </div>
         </div>
 
@@ -56,7 +51,7 @@
         </div>
 
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-8">
                 <h4 style="display: none;">
                     Seleccione un año: 
                     <select id="yearSelector">
@@ -73,6 +68,24 @@
                         <option value="all">Todos</option>
                     </select>
                 </h4>
+            </div>
+
+            <div class="col-md-4">
+                <div class="pull-right hidden">
+                    <h4>
+                        Exportar datos filtrados:
+                        <div class="btn-group btn-group-sm" role="group" aria-label="exportOptions">
+                            <button id="exportCsvDataButton" type="button" class="btn btn-info">CSV</button>
+                            <button id="exportTsvDataButton" type="button" class="btn btn-info">TSV</button>
+                            <button id="exportJsonDataButton" type="button" class="btn btn-info">JSON</button>
+                        </div>
+                    </h4>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
                 <div class="alert alert-warning" role="alert" id="alertAllYears" style="display: none;">
                     <strong>Advertencia: </strong>
                     <ul>
