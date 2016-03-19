@@ -37,8 +37,13 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-8">
                 <h1>Las llamadas al 911 de Bahía Blanca</h1>
+            </div>
+            <div class="col-md-4">
+                <div class="pull-right" id="exportDataButtonContainer">
+                    <button type="button" class="btn btn-info hidden" id="exportDataButton">Exportar datos filtrados (CSV)</button>
+                </div>
             </div>
         </div>
 
@@ -166,6 +171,8 @@
 
     <script type="text/javascript" src="js/async.js"></script>
 
+    <script type="text/javascript" src="js/download.js"></script>    
+
     <script type="text/javascript" src="vis.js"></script>
 
     <!-- Modals -->
@@ -177,6 +184,19 @@
                 </div>
                 <div class="modal-body">
                     Aguarde un momento, las visualizaciones se están cargando...
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="exportingDataModal" tabindex="-1" role="dialog" aria-labelledby="exportingDataModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="exportingDataModalLabel">Descargando</h4>
+                </div>
+                <div class="modal-body">
+                    Aguarde un momento, se están preparando los datos para ser descargados ...
                 </div>
             </div>
         </div>

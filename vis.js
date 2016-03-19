@@ -241,9 +241,6 @@ d3.tsv("data/"+lastYear+".tsv", function (data) {
             some: '<strong>%filter-count</strong> registros seleccionados de <strong>%total-count</strong>' +
                 ' | <a class="btn btn-danger btn-xs" href="javascript:dc.filterAll(); dc.renderAll();">Limpiar todos los filtros</a>',
             all: 'Todos los registros seleccionados. Utilice las visualizaciones para aplicar filtros sobre los datos.'
-        })
-        .formatNumber(function (value) {
-            return value;
         });
 
     // Initialize Visualizations
@@ -259,6 +256,7 @@ d3.tsv("data/"+lastYear+".tsv", function (data) {
     // Show headers and hide initial loading message
 	$('.loading').hide();
 	$('h4').show();
+    $('.hidden').removeClass('hidden');
 });
 
 function searchDataFromYear(year, callback) {
@@ -338,3 +336,29 @@ $("#yearSelector").on("change", function() {
 $(function () {
   $('[data-toggle="tooltip"]').tooltip()
 });
+
+function cleanDataForExport (data) {
+    var dataForExport = [];
+    data.forEach( function (object) {
+        dataForExport.push({
+            "lng" : object["lng"],
+            "lat" : object["lat"],
+            "fecha" : object["fecha"],
+            "evento" : events[object["evento"]],
+            "domicilio" : object["domicilio"]
+        });
+    });
+
+    return dataForExport;
+}
+
+// Set listener to button to export data in CSV format
+$("#exportDataButton").click(function (element) {
+    $("#exportingDataModal").modal("show");
+    setTimeout(function () {
+        var filteredData = timeLineVis.dimension().bottom(Infinity);
+        var cleanedData = cleanDataForExport(filteredData);
+        download(d3.csv.format(cleanedData), "datos.csv", "text/plain");
+        $("#exportingDataModal").modal("hide");
+    }, 500);
+})
